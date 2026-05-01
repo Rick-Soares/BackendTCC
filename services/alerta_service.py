@@ -1,13 +1,13 @@
-from db_service import carregar_db
+from services.db_service import carregar_db
 
 def alerta_queda(device_id):
     db = carregar_db()
 
     for dispositivo in db["devices"]:
-        if dispositivo["id"] == device_id:
-            email_usuario = dispositivo["email"]
+        if dispositivo["device_id"] == device_id:
+            email_usuario = dispositivo["email_usuario"]
 
-            for usuario in db["usuarios"]:
+            for usuario in db["users"]:
                 if usuario["email"] == email_usuario:
                     telefone = usuario["telefone"]
 

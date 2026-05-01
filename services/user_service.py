@@ -1,6 +1,5 @@
-from db_service import salvar_db, carregar_db, salvar_usuario
 from models.user_model import Usuario
-from services.db_service import buscar_usuario_email
+from services.db_service import buscar_usuario_email, carregar_db, salvar_usuario
 
 
 def criar_usuario(email, senha, telefone):

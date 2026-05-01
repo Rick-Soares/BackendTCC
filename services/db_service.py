@@ -1,6 +1,6 @@
 import json
 from models.device_model import Device
-BANCO = "../database/db.json"
+BANCO = "database/db.json"
 
 def carregar_db():
     with open(BANCO, 'r') as arquivo:
@@ -19,21 +19,23 @@ def salvar_usuario(user):
 
 def buscar_usuario_email(email):
     db = carregar_db()
-    for usuario in db["usuarios"]:
+    for usuario in db["users"]:
         if usuario["email"] == email:
             return usuario
     return False
 
 def deletar_usuario_por_email(email):
     db = carregar_db()
-    for usuario in db["usuarios"]:
+    for usuario in db["users"]:
         if usuario["email"] == email:
-            db["usuarios"].remove(usuario)
+            db["users"].remove(usuario)
             salvar_db(db)
             return True
     return False
 
 def registrar_dispositivo(email_usuario):
+    if not buscar_usuario_email(email_usuario):
+        raise FileNotFoundError("Email não encontrado.")
     db = carregar_db()
 
     dispositivo = Device(email_usuario=email_usuario)
