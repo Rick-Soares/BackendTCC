@@ -1,22 +1,99 @@
- # Byte-compiled / cache
+# ================================
+# 🐍 Python
+# ================================
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
 
-# Virtual environment
+# Distribuição / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ================================
+# 🌱 Virtual Environment
+# ================================
 venv/
-.env/
+.venv/
+env/
+ENV/
 
-# IDEs
+# ================================
+# 🔐 Variáveis de ambiente (CRÍTICO)
+# ================================
+.env
+.env.*
+*.env
+
+# Twilio (tokens, SID, etc)
+twilio.env
+credentials.json
+secrets.json
+
+# ================================
+# 🧪 Testes / coverage
+# ================================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ================================
+# 🧠 IDEs / editores
+# ================================
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Environment variables
-.env
-
-# Logs
-*.log
-
-# OS files
+# ================================
+# 🖥️ Sistema operacional
+# ================================
 .DS_Store
 Thumbs.db
+
+# ================================
+# 📜 Logs
+# ================================
+*.log
+logs/
+*.out
+
+# ================================
+# ⚙️ Banco de dados local
+# ================================
+*.sqlite3
+*.db
+
+# ================================
+# ☁️ Deploy / serverless
+# ================================
+.serverless/
+.aws/
+.vercel/
+.netlify/
+
+# ================================
+# 📦 Cache geral
+# ================================
+.cache/
+*.cache
+
+# ================================
+# 🔒 Arquivos sensíveis extras
+# ================================
+*.pem
+*.key
+*.crt
+
+# ================================
+# 📂 Uploads temporários
+# ================================
+uploads/
+tmp/
+temp/
+
+# ================================
+# 📊 Jupyter (se usar)
+# ================================
+.ipynb_checkpoints/
