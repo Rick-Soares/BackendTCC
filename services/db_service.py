@@ -1,4 +1,5 @@
 import json
+from models.device_model import Device
 BANCO = "../database/db.json"
 
 def carregar_db():
@@ -12,7 +13,7 @@ def salvar_db(novo_banco):
 
 def salvar_usuario(user):
     db = carregar_db()
-    db["users"].append(user)
+    db["users"].append(user.to_dict())
     salvar_db(db)
     return True
 
@@ -23,7 +24,7 @@ def buscar_usuario_email(email):
             return usuario
     return False
 
-def deletar_por_email(email):
+def deletar_usuario_por_email(email):
     db = carregar_db()
     for usuario in db["usuarios"]:
         if usuario["email"] == email:
@@ -31,3 +32,13 @@ def deletar_por_email(email):
             salvar_db(db)
             return True
     return False
+
+def registrar_dispositivo(email_usuario):
+    db = carregar_db()
+
+    dispositivo = Device(email_usuario=email_usuario)
+    db["devices"].append(dispositivo.to_dict())
+
+    salvar_db(db)
+    return True
+
