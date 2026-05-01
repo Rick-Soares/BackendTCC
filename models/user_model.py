@@ -1,11 +1,11 @@
 from pydantic import BaseModel, Field, EmailStr
-from uuid import UUID, uuid8
+from uuid import UUID, uuid4
 
 class Usuario(BaseModel):
     email: EmailStr
     senha: str
     telefone: str
-    id_usuario: UUID = Field(default_factory=uuid8)
+    id_usuario: UUID = Field(default_factory=uuid4)
 
     def to_dict(self):
         return {
