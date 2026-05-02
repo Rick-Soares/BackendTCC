@@ -10,7 +10,9 @@ def criar_usuario(email, senha, nome):
     usuario = Usuario.criar(data=data)
 
     salvar_usuario(usuario)
-    return usuario
+    return {
+        "mensagem": "Usuário cadastrado com sucesso."
+    }
 
 def login_user(email, senha):
     usuario = buscar_usuario_email(email)
@@ -18,7 +20,7 @@ def login_user(email, senha):
     if not usuario:
         raise ValueError("Usuário ou senha incorretos.")
 
-    if usuario["senha"] != senha:
+    if usuario["senha_hash"] != senha:
         raise ValueError("Usuário ou senha incorretos.")
 
     return {
@@ -26,10 +28,12 @@ def login_user(email, senha):
         "mensagem": "Login realizado com sucesso."
     }
 
-def criar_dispositivo(nome_dispostivo, tipo_dispositivo):
-    data = CriarDevice(device_name=nome_dispostivo, device_type=tipo_dispositivo)
+def criar_dispositivo(nome_dispositivo, tipo_dispositivo):
+    data = CriarDevice(device_name=nome_dispositivo, device_type=tipo_dispositivo)
     dispositivo = Device.criar(data=data, user_id="123")
 
     salvar_dispositivo(dispositivo)
 
-    return dispositivo
+    return {
+        "mensagem": "Dispositivo criado com sucesso."
+    }

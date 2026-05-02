@@ -1,11 +1,13 @@
 from uuid import uuid4
 import secrets
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime, UTC
 
 class CriarDevice(BaseModel):
     device_name: str
     device_type: str
+
+    model_config = ConfigDict(extra="forbid")
 
 class Device(BaseModel):
     device_id: str
