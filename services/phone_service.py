@@ -33,5 +33,3 @@ def remover_telefone(telefone_id, user_id):
     return {
         "mensagem": "Telefone removido com sucesso."
     }
-
-print(remover_telefone("9b654f5b-d514-46af-b4c8-3d54ca8d2a02", "123456"))

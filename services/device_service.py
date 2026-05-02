@@ -12,3 +12,4 @@ def criar_dispositivo(nome_dispositivo, tipo_dispositivo):
     return {
         "mensagem": "Dispositivo criado com sucesso."
     }
+criar_dispositivo("D1", "Tipo 1")

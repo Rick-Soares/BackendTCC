@@ -7,8 +7,9 @@ def alerta_queda(device_id):
         if dispositivo["device_id"] == device_id:
             user_id = dispositivo["user_id"]
 
-            for usuario in db["users"]:
-                if usuario["user_id"] == user_id:
-                    print(f"ALERTA! Queda detectada, ligando para {usuario["nome"]}")
-                    return True
+            for telefone in db["telefones"]:
+                if telefone["user_id"] == user_id:
+                    print(f"ALERTA! Queda detectada, ligando para {telefone["numero"]}")
+            return True
     return False
+alerta_queda("785e2214-1283-4992-a280-ff750947f5cf")
