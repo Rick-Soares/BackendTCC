@@ -19,3 +19,6 @@ class Telefone(BaseModel):
             numero = data.numero,
             created_at = datetime.now(UTC)
         )
+
+class TelefoneRequest(BaseModel):
+    numero: str
