@@ -1,14 +1,16 @@
-from models.user_model import Usuario
+from models.user_model import CriarUsuario, Usuario
 from services.db_service import buscar_usuario_email, salvar_usuario, salvar_dispositivo
 from models.device_model import CriarDevice, Device
 
-def criar_usuario(email, senha, telefone):
+def criar_usuario(email, senha, nome):
     if buscar_usuario_email(email):
         raise FileExistsError("Email já existente.")
 
-    user = Usuario(email=email, senha=senha, telefone=telefone)
-    salvar_usuario(user)
-    return True
+    data = CriarUsuario(email=email, senha=senha, nome=nome)
+    usuario = Usuario.criar(data=data)
+
+    salvar_usuario(usuario)
+    return usuario
 
 def login_user(email, senha):
     usuario = buscar_usuario_email(email)

@@ -13,7 +13,7 @@ def salvar_db(novo_banco):
 
 def salvar_usuario(user):
     db = carregar_db()
-    db["users"].append(user.to_dict())
+    db["users"].append(user.model_dump())
     salvar_db(db)
     return True
 
