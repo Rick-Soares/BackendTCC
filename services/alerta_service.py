@@ -37,3 +37,16 @@ def alerta_queda(device_id):
         "mensagem": "Alerta processado com sucesso.",
         "telefones_notificados": telefones
     }
+
+def listar_alertas(user_id):
+    db = carregar_db()
+    alertas = []
+
+    for alerta in db["alertas"]:
+        if alerta["user_id"] == user_id:
+            alertas.append(alerta)
+
+    if not alertas:
+        raise ValueError({"mensagem": "Nenhum registro de alerta encontrado para este id."})
+
+    return alertas

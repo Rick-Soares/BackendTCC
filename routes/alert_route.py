@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from services.alerta_service import alerta_queda
+from services.alerta_service import alerta_queda, listar_alertas
 from models.alert_model import AlertaRequest
 
 alert_router = APIRouter(prefix="/alerta", tags=["Alerta"])
@@ -12,3 +12,10 @@ def gerar_alerta(data: AlertaRequest):
         raise HTTPException(status_code=400, detail=str(e))
     else:
         return resposta
+
+@alert_router.get("/alertas")
+def alertas(user_id: str):
+    try:
+        return listar_alertas(user_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
