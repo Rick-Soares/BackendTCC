@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from services.user_service import criar_usuario, login_user
 from services.db_service import registrar_dispositivo
 from fastapi import HTTPException
-from models.user_model import Usuario
+from models.user_model import Usuario, LoginRequest
 
 auth_router = APIRouter(prefix="/auth", tags=["Autenticação"])
 
@@ -29,13 +29,11 @@ async def novo_dispositivo(email_usuario: str):
         }
 
 @auth_router.post("/login")
-async def login_usuario(email: str, senha: str):
+async def login_usuario(data: LoginRequest):
     try:
-        login_user(email, senha)
-    except FileNotFoundError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        login_user(data.email, data.senha)
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=401, detail=str(e))
     else:
         return {
             "mensagem": "Acesso liberado."

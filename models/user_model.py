@@ -14,3 +14,7 @@ class Usuario(BaseModel):
             "telefone": self.telefone,
             "id_usuario": self.id_usuario
         }
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    senha: str
