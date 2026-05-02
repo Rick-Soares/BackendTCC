@@ -55,3 +55,23 @@ def verificar_telefone(numero):
         if t["numero"] == numero:
             return False
     return True
+
+def buscar_telefones_por_usuario(user_id):
+    db = carregar_db()
+    telefones = []
+    for telefone in db["telefones"]:
+        if telefone["user_id"] == user_id:
+            telefones.append(telefone)
+    return telefones
+
+
+def deletar_telefone(telefone_id, user_id):
+    db = carregar_db()
+
+    for telefone in db["telefones"]:
+        if telefone["telefone_id"] == telefone_id and telefone["user_id"] == user_id:
+            db["telefones"].remove(telefone)
+            salvar_db(db)
+            return True
+
+    return False
