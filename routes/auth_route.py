@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from services.user_service import criar_usuario, login_user
-from models.user_model import Usuario, LoginRequest
+from models.user_model import CriarUsuario, LoginRequest
 
 auth_router = APIRouter(prefix="/auth", tags=["Autenticação"])
 
 @auth_router.post("/criar-usuario")
-async def novo_usuario(data: Usuario):
+async def novo_usuario(data: CriarUsuario):
     try:
-        criar_usuario(data.email, data.senha, data.telefone)
+        criar_usuario(data.email, data.senha, data.nome)
     except FileExistsError as e:
         raise HTTPException(status_code=400, detail=str(e))
     else:

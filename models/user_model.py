@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from uuid import uuid4
 from datetime import datetime, UTC
 
@@ -6,6 +6,8 @@ class CriarUsuario(BaseModel):
     email: EmailStr
     senha: str
     nome: str
+
+    model_config = ConfigDict(extra="forbid")
 
 class Usuario(BaseModel):
     user_id: str
