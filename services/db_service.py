@@ -1,6 +1,9 @@
 import json
+from pathlib import Path
 
-BANCO = "../database/db.json"
+BASE_DIR = Path(__file__).resolve().parent
+BANCO = BASE_DIR.parent / "database" / "db.json"
+
 
 def carregar_db():
     with open(BANCO, 'r') as arquivo:
