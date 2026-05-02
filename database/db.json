@@ -1,4 +1,6 @@
 {
-    "users": [],
-    "devices": []
+  "users": [],
+  "devices": [],
+  "telefones": [],
+  "alertas": []
 }

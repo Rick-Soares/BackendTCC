@@ -4,7 +4,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 BANCO = BASE_DIR.parent / "database" / "db.json"
 
-
 def carregar_db():
     with open(BANCO, 'r') as arquivo:
         return json.load(arquivo)
@@ -42,5 +41,3 @@ def salvar_dispositivo(dispositivo):
     salvar_db(db)
 
     return True
-
-

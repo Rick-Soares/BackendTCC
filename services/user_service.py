@@ -26,4 +26,3 @@ def login_user(email, senha):
         "email": usuario["email"],
         "mensagem": "Login realizado com sucesso."
     }
-

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from services.user_service import criar_dispositivo
+from services.device_service import criar_dispositivo
 from models.device_model import CriarDevice
 
-device_router = APIRouter(prefix="/order", tags=["Dispositivo"])
+device_router = APIRouter(prefix="/devices", tags=["Dispositivo"])
 
 @device_router.post("/registrar-dispositivo")
 async def novo_dispositivo(data: CriarDevice):

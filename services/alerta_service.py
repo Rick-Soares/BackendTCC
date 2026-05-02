@@ -5,12 +5,10 @@ def alerta_queda(device_id):
 
     for dispositivo in db["devices"]:
         if dispositivo["device_id"] == device_id:
-            email_usuario = dispositivo["email_usuario"]
+            user_id = dispositivo["user_id"]
 
             for usuario in db["users"]:
-                if usuario["email"] == email_usuario:
-                    telefone = usuario["telefone"]
-
-                    print(f"ALERTA! Queda detectada, ligando para {telefone}")
+                if usuario["user_id"] == user_id:
+                    print(f"ALERTA! Queda detectada, ligando para {usuario["nome"]}")
                     return True
     return False

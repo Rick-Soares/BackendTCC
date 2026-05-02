@@ -1,5 +1,5 @@
 from models.device_model import CriarDevice, Device
-from db_service import salvar_dispositivo
+from services.db_service import salvar_dispositivo
 
 
 def criar_dispositivo(nome_dispositivo, tipo_dispositivo):
