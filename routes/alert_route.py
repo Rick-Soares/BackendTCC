@@ -1,11 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from services.alerta_service import alerta_queda
+from models.alert_model import AlertaRequest
+
 alert_router = APIRouter(prefix="/alerta", tags=["Alerta"])
 
-@alert_router.post("/gerar-alerta")
-def gerar_alerta(device_id):
+@alert_router.post("/")
+def gerar_alerta(data: AlertaRequest):
     try:
-        resposta = alerta_queda(device_id)
+        resposta = alerta_queda(data.device_id)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     else:
