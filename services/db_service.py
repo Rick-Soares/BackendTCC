@@ -41,3 +41,17 @@ def salvar_dispositivo(dispositivo):
     salvar_db(db)
 
     return True
+
+def salvar_telefone(telefone):
+    db = carregar_db()
+    db["telefones"].append(telefone.model_dump())
+    salvar_db(db)
+
+    return True
+
+def verificar_telefone(numero):
+    db = carregar_db()
+    for t in db["telefones"]:
+        if t["numero"] == numero:
+            return False
+    return True
