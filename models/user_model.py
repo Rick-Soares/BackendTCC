@@ -1,19 +1,28 @@
-from pydantic import BaseModel, Field, EmailStr
-from uuid import UUID, uuid4
+from pydantic import BaseModel, EmailStr
+from uuid import uuid4
+from datetime import datetime, UTC
 
-class Usuario(BaseModel):
+class CriarUsuario(BaseModel):
     email: EmailStr
     senha: str
-    telefone: str
-    id_usuario: UUID = Field(default_factory=uuid4)
+    nome: str
 
-    def to_dict(self):
-        return {
-            "email": self.email,
-            "senha": self.senha,
-            "telefone": self.telefone,
-            "id_usuario": self.id_usuario
-        }
+class Usuario(BaseModel):
+    user_id: str
+    nome: str
+    email: str
+    senha_hash: str
+    created_at: datetime
+
+    @classmethod
+    def criar(cls, data: CriarUsuario):
+        return cls(
+            user_id = str(uuid4()),
+            nome = data.nome,
+            email = str(data.email),
+            senha_hash = data.senha,
+            created_at = datetime.now(UTC),
+        )
 
 class LoginRequest(BaseModel):
     email: EmailStr
