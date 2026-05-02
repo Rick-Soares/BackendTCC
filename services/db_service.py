@@ -64,7 +64,6 @@ def buscar_telefones_por_usuario(user_id):
             telefones.append(telefone)
     return telefones
 
-
 def deletar_telefone(telefone_id, user_id):
     db = carregar_db()
 

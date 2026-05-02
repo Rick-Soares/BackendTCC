@@ -11,6 +11,4 @@ def alerta_queda(device_id):
                 if telefone["user_id"] == user_id:
                     lista.append(f"ALERTA! ligando para {telefone["numero"]}")
             return lista
-        raise ValueError("Device_id nao encontrado.")
-    return False
-alerta_queda("785e2214-1283-4992-a280-ff750947f5cf")
+    raise ValueError("Device_id nao encontrado.")
