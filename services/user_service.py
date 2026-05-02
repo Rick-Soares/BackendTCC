@@ -1,5 +1,5 @@
 from models.user_model import Usuario
-from services.db_service import buscar_usuario_email, carregar_db, salvar_usuario
+from services.db_service import buscar_usuario_email, salvar_usuario
 
 
 def criar_usuario(email, senha, telefone):
@@ -11,10 +11,12 @@ def criar_usuario(email, senha, telefone):
     return True
 
 def login_user(email, senha):
-    db = carregar_db()
+    usuario = buscar_usuario_email(email)
 
-    for usuario in db["users"]:
-        if usuario["email"] == email and usuario["senha"] == senha:
-            return True
+    if not usuario:
+        raise FileNotFoundError("Usuário ou senha incorreto.")
 
-    return False
+    if usuario["senha"] == senha:
+        return True
+
+    raise ValueError("Usuário ou senha incorreto.")
