@@ -1,12 +1,12 @@
 from fastapi import APIRouter, HTTPException
-from services.db_service import registrar_dispositivo
+from services.user_service import criar_dispositivo
 
 device_router = APIRouter(prefix="/order", tags=["Dispositivo"])
 
 @device_router.post("/registrar-dispositivo")
-async def novo_dispositivo(email_usuario: str):
+async def novo_dispositivo(nome_dispositivo: str, tipo_dispositivo: str):
     try:
-        registrar_dispositivo(email_usuario)
+        criar_dispositivo(nome_dispositivo, tipo_dispositivo)
     except FileNotFoundError as e:
         raise HTTPException(status_code=400, detail=str(e))
     else:
