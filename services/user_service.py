@@ -1,6 +1,5 @@
 from models.user_model import CriarUsuario, Usuario
-from services.db_service import buscar_usuario_email, salvar_usuario, salvar_dispositivo
-from models.device_model import CriarDevice, Device
+from services.db_service import buscar_usuario_email, salvar_usuario
 
 def criar_usuario(email, senha, nome):
     if buscar_usuario_email(email):
@@ -28,12 +27,3 @@ def login_user(email, senha):
         "mensagem": "Login realizado com sucesso."
     }
 
-def criar_dispositivo(nome_dispositivo, tipo_dispositivo):
-    data = CriarDevice(device_name=nome_dispositivo, device_type=tipo_dispositivo)
-    dispositivo = Device.criar(data=data, user_id="123")
-
-    salvar_dispositivo(dispositivo)
-
-    return {
-        "mensagem": "Dispositivo criado com sucesso."
-    }
