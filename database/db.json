@@ -1,5 +1,13 @@
 {
-    "users": [],
+    "users": [
+        {
+            "user_id": "0079c45a-83de-4903-bccb-b4f631bb39a2",
+            "nome": "Ricardinho011",
+            "email": "email@gmail.com",
+            "senha_hash": "123",
+            "created_at": "2026-05-04 21:23:52.609438+00:00"
+        }
+    ],
     "devices": [],
     "telefones": [],
     "alertas": []

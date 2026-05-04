@@ -7,7 +7,7 @@ algoritmo = "HS256"
 expira_em = 60
 
 
-def criar_token(user_id: str) -> str:
+def gerar_token(user_id: str) -> str:
     expire = datetime.now(UTC) + timedelta(minutes=expira_em)
 
     payload = {
@@ -33,3 +33,4 @@ def decodificar_token(token: str) -> str:
 
     except JWTError:
         raise Exception("Token inválido ou expirado")
+

@@ -1,6 +1,6 @@
 from models.user_model import CriarUsuario, Usuario
 from services.db_service import buscar_usuario_email, salvar_usuario
-
+from auth.jwt_auth import gerar_token
 def criar_usuario(email, senha, nome):
     if buscar_usuario_email(email):
         raise FileExistsError("Email já existente.")
@@ -22,7 +22,8 @@ def login_user(email, senha):
     if usuario["senha_hash"] != senha:
         raise ValueError("Usuário ou senha incorretos.")
 
+    token = gerar_token(usuario["user_id"])
     return {
-        "email": usuario["email"],
+        "acess_token": token,
         "mensagem": "Login realizado com sucesso."
     }
