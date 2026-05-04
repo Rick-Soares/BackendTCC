@@ -1,10 +1,13 @@
 from datetime import datetime, timedelta, UTC
 from jose import jwt,JWTError
+from dotenv import load_dotenv
+import os
 
-# (jogar em.env)
-chave_secreta = "segredo-completo"
-algoritmo = "HS256"
-expira_em = 60
+load_dotenv()
+
+chave_secreta = os.getenv("chave_secreta")
+algoritmo = os.getenv("algoritmo")
+expira_em = int(os.getenv("expira_em"))
 
 
 def gerar_token(user_id: str) -> str:
