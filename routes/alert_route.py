@@ -8,7 +8,7 @@ alert_router = APIRouter(prefix="/alerta", tags=["Alerta"])
 @alert_router.post("/")
 def gerar_alerta(data: AlertaRequest):
     try:
-        resposta = alerta_queda(data.device_id)
+        resposta = alerta_queda(data.device_id, data.device_token)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     else:

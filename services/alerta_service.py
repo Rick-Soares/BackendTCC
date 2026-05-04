@@ -2,7 +2,7 @@ from services.db_service import carregar_db, salvar_db
 from datetime import datetime, UTC
 from uuid import uuid4
 
-def alerta_queda(device_id):
+def alerta_queda(device_id, device_token):
     db = carregar_db()
     dispositivo = None
 
@@ -12,6 +12,9 @@ def alerta_queda(device_id):
             break
     if not dispositivo:
         raise ValueError("Dispositivo nao encontrado.")
+
+    if dispositivo["device_token"] != device_token:
+        raise ValueError("Token do dispositivo inválido")
 
     user_id = dispositivo["user_id"]
     telefones = []
