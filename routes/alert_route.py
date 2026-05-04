@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from services.alerta_service import alerta_queda, listar_alertas
 from models.alert_model import AlertaRequest
+from auth.dependencias_auth import verificar_token
 
 alert_router = APIRouter(prefix="/alerta", tags=["Alerta"])
 
@@ -14,7 +15,7 @@ def gerar_alerta(data: AlertaRequest):
         return resposta
 
 @alert_router.get("/alertas")
-def alertas(user_id: str):
+def alertas(user_id: str = Depends(verificar_token)):
     try:
         return listar_alertas(user_id)
     except ValueError as e:

@@ -1,31 +1,30 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from models.phone_model import TelefoneRequest
 from services.phone_service import (
     criar_telefone,
     listar_telefones,
     remover_telefone
 )
+from auth.dependencias_auth import verificar_token
 
 phone_router = APIRouter(prefix="/phones", tags=["Telefones"])
-#user id para testes
-USER_ID_FIXO = "123"
 
 @phone_router.post("/add-phone")
-async def novo_telefone(data: TelefoneRequest):
+async def novo_telefone(data: TelefoneRequest, user_id: str = Depends(verificar_token)):
     try:
-        return criar_telefone(data.numero, USER_ID_FIXO)
+        return criar_telefone(data.numero, user_id)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 
 @phone_router.get("/list-phones")
-async def listar():
-    return listar_telefones(USER_ID_FIXO)
+async def listar(user_id: str = Depends(verificar_token)):
+    return listar_telefones(user_id)
 
 
 @phone_router.delete("/{telefone_id}")
-async def deletar(telefone_id: str):
+async def deletar(telefone_id: str, user_id: str = Depends(verificar_token)):
     try:
-        return remover_telefone(telefone_id, USER_ID_FIXO)
+        return remover_telefone(telefone_id, user_id)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
