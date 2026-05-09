@@ -24,6 +24,6 @@ def login_user(email, senha):
 
     token = gerar_token(usuario["user_id"])
     return {
-        "access_token": token,
-        "mensagem": "Login realizado com sucesso."
-    }
+  "access_token": token,
+  "token_type": "bearer"
+}

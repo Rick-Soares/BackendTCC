@@ -9,7 +9,7 @@ from auth.dependencias_auth import verificar_token
 
 phone_router = APIRouter(prefix="/phones", tags=["Telefones"])
 
-@phone_router.post("/add-phone")
+@phone_router.post("/")
 async def novo_telefone(data: TelefoneRequest, user_id: str = Depends(verificar_token)):
     try:
         return criar_telefone(data.numero, user_id)
@@ -17,7 +17,7 @@ async def novo_telefone(data: TelefoneRequest, user_id: str = Depends(verificar_
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@phone_router.get("/list-phones")
+@phone_router.get("/")
 async def listar(user_id: str = Depends(verificar_token)):
     return listar_telefones(user_id)
 

@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, Depends
-from services.device_service import criar_dispositivo
+from services.device_service import criar_dispositivo, listar_dispositivo
 from models.device_model import CriarDevice
 from auth.dependencias_auth import verificar_token
 
 device_router = APIRouter(prefix="/devices", tags=["Dispositivo"])
 
-@device_router.post("/registrar-dispositivo")
+@device_router.post("/")
 async def novo_dispositivo(data: CriarDevice, user_id : str = Depends(verificar_token)):
     try:
         resposta = criar_dispositivo(data.device_name, data.device_type, user_id)
@@ -13,3 +13,8 @@ async def novo_dispositivo(data: CriarDevice, user_id : str = Depends(verificar_
         raise HTTPException(status_code=400, detail=str(e))
     else:
         return resposta
+
+@device_router.get("/")
+async def dispositivos(user_id : str = Depends(verificar_token)):
+     return listar_dispositivo(user_id=user_id)
+    

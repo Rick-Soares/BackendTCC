@@ -74,3 +74,11 @@ def deletar_telefone(telefone_id, user_id):
             return True
 
     return False
+
+def buscar_dispositivos_por_usuario(user_id):
+    db = carregar_db()
+    dispositivos = []
+    for dispositivo in db["devices"]:
+        if user_id == dispositivo["user_id"]:
+            dispositivos.append(dispositivo)
+    return dispositivos
