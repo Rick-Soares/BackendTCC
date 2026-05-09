@@ -17,4 +17,3 @@ async def novo_dispositivo(data: CriarDevice, user_id : str = Depends(verificar_
 @device_router.get("/")
 async def dispositivos(user_id : str = Depends(verificar_token)):
      return listar_dispositivo(user_id=user_id)
-    

@@ -31,7 +31,8 @@ def alerta_queda(device_id, device_token):
         "device_id": device_id,
         "user_id": user_id,
         "timestamp": datetime.now(UTC),
-        "telefones_notificados": telefones
+        "telefones_notificados": telefones,
+        "device_name": dispositivo["device_name"],
     }
     db["alertas"].append(alerta_registro)
     salvar_db(db)
@@ -48,8 +49,8 @@ def listar_alertas(user_id):
     for alerta in db["alertas"]:
         if alerta["user_id"] == user_id:
             alertas.append(alerta)
+    return {
+        "alertas": alertas
+    }
 
-    if not alertas:
-        raise ValueError({"mensagem": "Nenhum registro de alerta encontrado para este id."})
-
-    return alertas
+alerta_queda("56f8f663-6d00-4a8b-bca2-bf20ba8a6229", "8e0b1bb8e371fb8322e5887625cc30e2")

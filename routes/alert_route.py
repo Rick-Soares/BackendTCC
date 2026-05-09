@@ -14,7 +14,7 @@ def gerar_alerta(data: AlertaRequest):
     else:
         return resposta
 
-@alert_router.get("/alertas")
+@alert_router.get("/")
 def alertas(user_id: str = Depends(verificar_token)):
     try:
         return listar_alertas(user_id)
