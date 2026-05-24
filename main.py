@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+app = FastAPI(
+    title="Backend TCC",
+    version="1.0.0"
+)
 
 from routes.phone_route import phone_router
 from routes.auth_route import auth_router
@@ -12,7 +16,6 @@ app.include_router(auth_router)
 app.include_router(device_router)
 app.include_router(alert_router)
 
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,3 +24,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def root():
+    return {"status": "online"}
