@@ -52,5 +52,3 @@ def listar_alertas(user_id):
     return {
         "alertas": alertas
     }
-
-alerta_queda("56f8f663-6d00-4a8b-bca2-bf20ba8a6229", "8e0b1bb8e371fb8322e5887625cc30e2")
