@@ -1,5 +1,6 @@
 from pathlib import Path
 import sqlite3
+from ast import literal_eval
 
 from models.phone_model import CriarTelefone, Telefone
 from models.user_model import Usuario, CriarUsuario
@@ -167,13 +168,27 @@ def salvar_alerta(id_alerta, id_dispositivo, id_usuario, data, telefones, nome_d
 def lista_alertas(id_usuario):
     with abrir_conexao() as conexao:
         cursor = conexao.cursor()
-        comando = "SELECT * FROM alertas WHERE id_usuario = ?"
-        valor = (str(id_usuario),)
-        cursor.execute(comando, valor)
+
+        cursor.execute(
+            "SELECT * FROM alertas WHERE id_usuario = ?",
+            (str(id_usuario),)
+        )
 
         resposta = cursor.fetchall()
+
         alertas = []
-        if resposta is None:
-            return alertas
-        return resposta
+
+        for alerta in resposta:
+            alertas.append(
+                {
+                    "alerta_id": alerta[0],
+                    "device_id": alerta[1],
+                    "user_id": alerta[2],
+                    "timestamp": alerta[3],
+                    "telefones_notificados": literal_eval(alerta[4]),
+                    "device_name": alerta[5],
+                }
+            )
+
+        return alertas
 

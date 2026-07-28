@@ -16,19 +16,15 @@ def alerta_queda(device_id, device_token):
     for telefone in telefones:
         numeros_notificados.append(telefone.numero)
 
+    salvar_alerta(id_alerta=str(uuid4()),
+                  id_dispositivo=str(device_id),
+                  id_usuario=str(user_id),
+                  data=str(datetime.now(UTC)),
+                  telefones=str(numeros_notificados),
+                  nome_dispositivo=str(dispositivo.device_name))
 
     if not telefones:
         return {"mensagem": "Alerta recebido, mas nenhum telefone cadastrado."}
-
-
-    salvar_alerta(id_alerta= str(uuid4()),
-                  id_dispositivo= str(device_id),
-                  id_usuario= str(user_id),
-                  data= str(datetime.now(UTC)),
-                  telefones= str(numeros_notificados),
-                  nome_dispositivo= str(dispositivo.device_name))
-
-
     return {
         "mensagem": "Alerta processado com sucesso.",
         "telefones_notificados": telefones
