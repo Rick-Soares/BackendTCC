@@ -23,10 +23,10 @@ def login_user(email, senha):
     if not usuario:
         raise ValueError("Usuário ou senha incorretos.")
 
-    if not verificar_senha(senha, usuario["senha_hash"]):
+    if not verificar_senha(senha, usuario.senha_hash):
         raise ValueError("Usuário ou senha incorretos.")
 
-    token = gerar_token(usuario["user_id"])
+    token = gerar_token(usuario.user_id)
     return {
   "access_token": token,
   "token_type": "bearer"

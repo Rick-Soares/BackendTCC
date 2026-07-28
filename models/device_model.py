@@ -15,15 +15,15 @@ class Device(BaseModel):
     device_type: str
     device_token: str
     user_id: str
-    created_at: datetime
+    created_at: str | datetime
 
     @classmethod
-    def criar(cls, data: CriarDevice, user_id: str):
+    def criar(cls, data: CriarDevice, user_id: str = None, id_dispositivo = None, token_dispositivo = None, criado_em = None):
         return cls(
-            device_id = str(uuid4()),
+            device_id = id_dispositivo or str(uuid4()),
             device_name = data.device_name,
             device_type = data.device_type,
-            device_token = secrets.token_hex(16),
+            device_token = token_dispositivo or secrets.token_hex(16),
             user_id = user_id,
-            created_at = datetime.now(UTC),
+            created_at = criado_em or datetime.now(UTC)
         )

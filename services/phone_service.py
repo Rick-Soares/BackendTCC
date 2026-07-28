@@ -25,7 +25,7 @@ def listar_telefones(user_id):
 
 
 def remover_telefone(telefone_id, user_id):
-    sucesso = deletar_telefone(telefone_id, user_id)
+    sucesso = deletar_telefone(telefone_id)
 
     if not sucesso:
         raise ValueError("Telefone não encontrado.")

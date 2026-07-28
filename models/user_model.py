@@ -17,13 +17,13 @@ class Usuario(BaseModel):
     created_at: datetime
 
     @classmethod
-    def criar(cls, data: CriarUsuario):
+    def criar(cls, data: CriarUsuario, id_usuario = None, criado_em = None):
         return cls(
-            user_id = str(uuid4()),
+            user_id = id_usuario or str(uuid4()),
             nome = data.nome,
             email = str(data.email),
             senha_hash = data.senha,
-            created_at = datetime.now(UTC),
+            created_at = criado_em or datetime.now(UTC),
         )
 
 class LoginRequest(BaseModel):
