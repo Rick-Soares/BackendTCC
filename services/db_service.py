@@ -192,3 +192,55 @@ def lista_alertas(id_usuario):
 
         return alertas
 
+def criar_tabelas():
+    with abrir_conexao() as conexao:
+        cursor = conexao.cursor()
+
+        cursor.executescript("""
+        CREATE TABLE IF NOT EXISTS usuarios (
+    id TEXT PRIMARY KEY,
+    nome TEXT,
+    email TEXT,
+    senha TEXT,
+    criado_em TEXT
+);
+
+CREATE TABLE IF NOT EXISTS dispositivos (
+    id TEXT PRIMARY KEY,
+    nome TEXT,
+    tipe TEXT,
+    token TEXT,
+    id_usuario TEXT,
+    criado_em TEXT,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS telefones (
+    id TEXT PRIMARY KEY,
+    numero TEXT,
+    id_usuario TEXT,
+    criado_em TEXT,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS alertas (
+    id TEXT PRIMARY KEY,
+    id_dispositivo TEXT,
+    id_usuario TEXT,
+    data TEXT,
+    telefones_notificados TEXT,
+    nome_dispositivo TEXT,
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE,
+);
+        """)
+
+        conexao.commit()

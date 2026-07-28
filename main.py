@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from services.db_service import criar_tabelas
+
+criar_tabelas()
 
 app = FastAPI(
     title="Backend TCC",
