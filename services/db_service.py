@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS alertas (
 
     FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
 );
         """)
 
