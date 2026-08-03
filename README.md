@@ -1,112 +1,108 @@
-# 🚨 Sistema de Detecção de Quedas com IoT
+# 🚨 Sistema de Detecção de Quedas (Backend)
 
-Este projeto tem como objetivo desenvolver um sistema de **detecção de quedas em tempo real**, voltado para auxiliar pessoas em situações de risco, enviando alertas automáticos para contatos cadastrados.
+API desenvolvida em **Python + FastAPI** para um sistema de detecção de quedas utilizando IoT. O projeto faz parte de um TCC e é responsável pelo gerenciamento de usuários, dispositivos, contatos de emergência e alertas enviados pelo dispositivo.
 
-O sistema é baseado no conceito de **Internet of Things (IoT)**, onde um dispositivo físico se comunica com um backend na nuvem para disparo de notificações críticas.
+## ✨ Funcionalidades
 
----
+- Cadastro e autenticação de usuários
+- Cadastro de dispositivos
+- Cadastro de contatos de emergência
+- Registro de alertas
+- API REST para integração com ESP32
+- Estrutura organizada em rotas, serviços e repositórios
 
-# 🧠 Motivação
+## 🛠️ Tecnologias
 
-Quedas são uma das principais causas de acidentes domésticos graves, especialmente entre idosos ou pessoas com mobilidade reduzida.
-
-Este projeto busca aplicar tecnologia IoT para:
-
-- Detectar eventos de queda em tempo real (via dispositivo físico futuro)
-- Automatizar o envio de alertas
-- Reduzir o tempo de resposta em situações de emergência
-- Tornar a solução acessível e de fácil configuração por usuários leigos
-
----
-
-# ⚙️ Arquitetura do Sistema
-
-O sistema é dividido em três partes principais:
-
-### 📱 Interface Web (Frontend)
-- Responsável pelo cadastro de usuários
-- Configuração de telefone e dispositivos
-- Hospedado futuramente na Vercel
-
-### 🧠 Backend (API)
-- Desenvolvido em Python
-- Responsável pela lógica de negócio
-- Autenticação e gerenciamento de usuários/dispositivos
-- Recebimento de eventos do dispositivo IoT
-- Disparo de notificações
-
-### 📡 Dispositivo IoT (futuro)
-- Baseado em ESP32
-- Responsável por detectar quedas
-- Envia eventos para o backend via internet
-
----
-
-# 🧰 Tecnologias Utilizadas
-
-### Backend
 - Python
 - FastAPI
-- JSON (armazenamento inicial)
-- Estrutura baseada em Services + Repositories
+- SQLite
+- JWT
+- Pydantic
+- Uvicorn
 
-### Integração e Comunicação
-- API REST
-- Webhooks (IoT → Backend)
-- Telegram (fase de testes)
-- Twilio (futuro para chamadas reais)
+## 📂 Estrutura
 
-### Infraestrutura
-- Vercel (frontend e possíveis funções serverless)
-- GitHub (versionamento do código)
+```text
+auth/
+database/
+models/
+repositories/
+routes/
+services/
+main.py
+```
 
----
+## 🚀 Como usar
 
-# 🚀 Funcionalidades (em desenvolvimento)
+### 1. Clone o repositório
 
-- [x] Cadastro de usuários
-- [x] Login simples (email e senha)
-- [x] Associação de telefone ao usuário
-- [x] Registro de dispositivos
-- [x] Sistema de alerta simulado
-- [ ] Integração com dispositivo IoT real
-- [ ] Chamadas automáticas via Twilio
-- [ ] Dashboard web completo
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd BackendTCC
+```
 
----
+### 2. Crie um ambiente virtual
 
-# 🔁 Fluxo do Sistema
+**Windows**
 
-1. Usuário cria conta na plataforma
-2. Cadastra telefone de emergência
-3. Associa um dispositivo IoT
-4. Dispositivo detecta uma queda
-5. Backend recebe o evento
-6. Sistema envia notificação (Telegram ou ligação futura)
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
 
----
+**Linux/macOS**
 
-# 📌 Observação sobre o projeto
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-Este projeto está em fase de desenvolvimento e tem como objetivo principal a integração entre:
+### 3. Instale as dependências
 
-- Backend moderno
-- Dispositivos IoT (ESP32)
-- Serviços de comunicação em nuvem
+```bash
+pip install -r requirements.txt
+```
 
----
+### 4. Configure as variáveis de ambiente
 
-# 📈 Futuro do projeto
+Crie um arquivo `.env` na raiz do projeto e defina as variáveis necessárias.
+
+Exemplo:
+
+```env
+SECRET_KEY=sua_chave123
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+```
+
+### 5. Execute a aplicação
+
+```bash
+uvicorn main:app --reload
+```
+
+A API estará disponível em:
+
+```
+http://127.0.0.1:8000
+```
+
+## 📖 Documentação
+
+Após iniciar a aplicação, acesse:
+
+- Swagger: `http://127.0.0.1:8000/docs`
+
+## 📌 Status
+
+O projeto está em desenvolvimento. As próximas etapas incluem:
 
 - Integração completa com ESP32
-- Sistema de chamadas automáticas via Twilio
-- Aplicação mobile
-- Melhorias de segurança (JWT e criptografia de senhas)
-- Migração de JSON para banco de dados relacional
+- Chamadas automáticas via Twilio
+- Melhorias na segurança
+- Expansão das funcionalidades da API
+- Implementação de testes automatizados
 
----
+## 👨‍💻 Autor
 
-# 👨‍💻 Autor
-
-
-Projeto desenvolvido por Ricardo Soares como base para TCC na área de tecnologia, com foco em **IoT, backend e automação de emergências médicas**.
+Desenvolvido por **Ricardo Soares** como projeto de TCC, aplicando conceitos de **Backend, APIs REST e Internet das Coisas (IoT)**.
