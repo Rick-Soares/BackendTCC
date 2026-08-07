@@ -26,7 +26,7 @@ def test_novo_dispositivo():
     response = client.post("/devices/", json=DISPOSITIVO, headers=headers)
 
     esvaziar_tabelas()
-    assert response.status_code == 200
+    assert response.status_code == 201
 
 def test_exibir_dispositivos():
     client.post("/auth/criar-usuario", json=USUARIO)

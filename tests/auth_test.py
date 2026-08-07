@@ -13,7 +13,7 @@ LOGIN = {
 def test_novo_usuario():
     response = client.post("/auth/criar-usuario", json=USUARIO)
     esvaziar_tabelas()
-    assert response.status_code == 200
+    assert response.status_code == 201
 
 def test_login_usuario():
     client.post("/auth/criar-usuario", json=USUARIO)

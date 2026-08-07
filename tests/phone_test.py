@@ -24,7 +24,7 @@ def test_novo_telefone():
 
     esvaziar_tabelas()
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
 def test_listar_telefones():
     client.post("/auth/criar-usuario", json=USUARIO)
