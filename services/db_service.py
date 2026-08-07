@@ -244,3 +244,15 @@ CREATE TABLE IF NOT EXISTS alertas (
         """)
 
         conexao.commit()
+
+def esvaziar_tabelas():
+    with abrir_conexao() as conexao:
+        cursor = conexao.cursor()
+
+        cursor.execute("DELETE FROM dispositivos")
+        cursor.execute("DELETE FROM usuarios")
+        cursor.execute("DELETE FROM telefones")
+        cursor.execute("DELETE FROM alertas")
+
+        conexao.commit()
+
