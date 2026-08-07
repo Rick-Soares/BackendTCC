@@ -1,3 +1,4 @@
+from exceptions import RecursoJaExisteError, RecursoNaoEncontradoError
 from models.phone_model import CriarTelefone, Telefone
 from services.db_service import salvar_telefone, verificar_telefone, buscar_telefones_por_usuario, deletar_telefone
 
@@ -5,7 +6,7 @@ def criar_telefone(numero, user_id):
     if not numero.isdigit():
         raise ValueError("Número inválido.")
     if not verificar_telefone(numero):
-        raise ValueError("Telefone já cadastrado.")
+        raise RecursoJaExisteError("Telefone já cadastrado.")
 
     data = CriarTelefone(numero=numero)
     telefone = Telefone.criar(data=data, user_id=user_id)
@@ -28,7 +29,7 @@ def remover_telefone(telefone_id, user_id):
     sucesso = deletar_telefone(telefone_id)
 
     if not sucesso:
-        raise ValueError("Telefone não encontrado.")
+        raise RecursoNaoEncontradoError("Telefone não encontrado.")
 
     return {
         "mensagem": "Telefone removido com sucesso."

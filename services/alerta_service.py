@@ -1,3 +1,4 @@
+from exceptions import RecursoNaoEncontradoError, CredenciaisInvalidasError
 from services.db_service import busca_dispositivo_por_id, buscar_telefones_por_usuario, salvar_alerta, lista_alertas
 from datetime import datetime, UTC
 from uuid import uuid4
@@ -5,10 +6,10 @@ from uuid import uuid4
 def alerta_queda(device_id, device_token):
     dispositivo = busca_dispositivo_por_id(device_id)
     if not dispositivo:
-        raise ValueError("Dispositivo nao encontrado.")
+        raise RecursoNaoEncontradoError("Dispositivo nao encontrado.")
 
     if dispositivo.device_token != device_token:
-        raise ValueError("Token do dispositivo inválido")
+        raise CredenciaisInvalidasError("Token do dispositivo inválido")
 
     user_id = dispositivo.user_id
     telefones = buscar_telefones_por_usuario(user_id= user_id)
