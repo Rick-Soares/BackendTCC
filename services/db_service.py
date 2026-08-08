@@ -7,7 +7,7 @@ from models.user_model import Usuario, CriarUsuario
 from models.device_model import Device, CriarDevice
 
 BASE_DIR = Path(__file__).resolve().parent
-CAMINHO_DATABASE = BASE_DIR.parent / "database" / "data.db"
+CAMINHO_DATABASE = BASE_DIR.parent / "database" / "data.db" #trocar aqui para realizar testes
 
 def abrir_conexao():
     return sqlite3.connect(CAMINHO_DATABASE)
@@ -255,4 +255,3 @@ def esvaziar_tabelas():
         cursor.execute("DELETE FROM alertas")
 
         conexao.commit()
-

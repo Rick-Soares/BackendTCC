@@ -6,9 +6,9 @@ from exceptions import CredenciaisInvalidasError
 
 load_dotenv()
 
-chave_secreta = os.getenv("chave_secreta")
-algoritmo = os.getenv("algoritmo")
-expira_em = int(os.getenv("expira_em"))
+chave_secreta = os.getenv("SECRET_KEY")
+algoritmo = os.getenv("ALGORITHM")
+expira_em = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
 
 def gerar_token(user_id: str) -> str:
