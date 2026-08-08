@@ -21,5 +21,5 @@ def gerar_alerta(data: AlertaRequest):
 def alertas(user_id: str = Depends(verificar_token)):
     try:
         return listar_alertas(user_id)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    except CredenciaisInvalidasError as e:
+        raise HTTPException(status_code=401, detail=str(e))

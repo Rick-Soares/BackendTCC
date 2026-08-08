@@ -12,5 +12,5 @@ def verificar_token(credentials = Depends(security)):
         user_id = decodificar_token(token)
         return user_id
 
-    except CredenciaisInvalidasError:
+    except CredenciaisInvalidasError as e:
         raise HTTPException(status_code=401, detail="Token inválido")

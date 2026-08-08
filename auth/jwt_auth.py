@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, UTC
 from jose import jwt,JWTError
 from dotenv import load_dotenv
 import os
+from exceptions import CredenciaisInvalidasError
 
 load_dotenv()
 
@@ -30,10 +31,10 @@ def decodificar_token(token: str) -> str:
         user_id = payload.get("sub")
 
         if user_id is None:
-            raise Exception("Token inválido")
+            raise CredenciaisInvalidasError("Token inválido")
 
         return user_id
 
     except JWTError:
-        raise Exception("Token inválido ou expirado")
+        raise CredenciaisInvalidasError("Token inválido ou expirado")
 

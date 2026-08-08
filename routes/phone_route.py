@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
-from exceptions import RecursoJaExisteError, RecursoNaoEncontradoError
+from exceptions import RecursoJaExisteError, RecursoNaoEncontradoError, DadoInvalidoError, CredenciaisInvalidasError
 from models.phone_model import TelefoneRequest
 from services.phone_service import (
     criar_telefone,
@@ -16,11 +16,20 @@ async def novo_telefone(data: TelefoneRequest, user_id: str = Depends(verificar_
         return criar_telefone(data.numero, user_id)
     except RecursoJaExisteError as e:
         raise HTTPException(status_code=409, detail=str(e))
+    except DadoInvalidoError as e:
+        raise HTTPException(status_code=422, detail=str(e))
 
 
 @phone_router.get("/", status_code=status.HTTP_200_OK)
 async def listar(user_id: str = Depends(verificar_token)):
-    return listar_telefones(user_id)
+    try:
+        resposta = listar_telefones(user_id)
+    except CredenciaisInvalidasError as e:
+        raise HTTPException(status_code=401, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    else:
+        return resposta
 
 
 @phone_router.delete("/{telefone_id}", status_code=status.HTTP_200_OK)
@@ -29,3 +38,5 @@ async def deletar(telefone_id: str, user_id: str = Depends(verificar_token)):
         return remover_telefone(telefone_id, user_id)
     except RecursoNaoEncontradoError as e:
         raise HTTPException(status_code=404, detail=str(e))
+    except CredenciaisInvalidasError as e:
+        raise HTTPException(status_code=401, detail=str(e))
