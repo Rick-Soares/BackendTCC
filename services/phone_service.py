@@ -3,9 +3,14 @@ from models.phone_model import CriarTelefone, Telefone
 from services.db_service import salvar_telefone, verificar_telefone, buscar_telefones_por_usuario, deletar_telefone
 
 def criar_telefone(numero, user_id):
-    if not numero.isdigit():
-        raise DadoInvalidoError("Número inválido.")
-    if not verificar_telefone(numero):
+    numero_tratado = numero.strip()
+    if not numero_tratado.isdigit():
+        raise DadoInvalidoError("Telefone inválido. O telefone deve conter apenas números")
+    if len(numero_tratado) != 13:
+        raise DadoInvalidoError("Telefone inválido. O telefone deve conter exatamente 13 digitos.")
+    if not numero_tratado.startswith("55"):
+        raise DadoInvalidoError("Telefone inválido. O número deve conter DDI '55'")
+    if not verificar_telefone(numero_tratado):
         raise RecursoJaExisteError("Telefone já cadastrado.")
 
     data = CriarTelefone(numero=numero)

@@ -22,10 +22,10 @@ LOGIN_OUTRO_USUARIO = {
     "senha": "123456"
 }
 TELEFONE = {
-    "numero": "1123456789"
+    "numero": "5511999999999"
 }
 TELEFONE_INVALIDO =  {
-    "numero": "numeroErrado"
+    "numero": "1199999999"
 }
 def test_novo_telefone_correto():
     client.post("/auth/criar-usuario", json=USUARIO)
